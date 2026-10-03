@@ -1,0 +1,11 @@
+<!DOCTYPE html><html><head><meta charset="UTF-8"><title>ComicCraft</title>
+<link rel="stylesheet" href="/static/css/style.css"></head><body><div class="container">
+<div class="hero"><h1>🎨 ComicCraft</h1><p>AI Comic Story Creator using Gemini Models</p><p>Turn your idea into a 5-panel comic story.</p></div>
+{% if error %}<div class="error">{{ error }}</div>{% endif %}
+<form action="/generate" method="post" class="card">
+<label>Story Prompt</label><textarea name="story_prompt" required placeholder="A brave fox exploring an enchanted forest"></textarea>
+<label>Main Character Name</label><input name="character_name" required placeholder="Arjun">
+<label>Setting</label><select name="setting"><option>Enchanted forest</option><option>School</option><option>City</option><option>Space</option><option>Beach</option></select>
+<label>Story Tone</label><select name="tone"><option>funny</option><option>light-hearted</option><option>dramatic</option><option>adventurous</option></select>
+<label>Art Style</label><select name="art_style"><option>comic book</option><option>anime</option><option>cartoon</option><option>pixel art</option></select>
+<button type="submit">✨ Generate My Comic</button></form></div></body></html>

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ComicCraft - Your Comic</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f1ff;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: 30px auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: #4b2e83;
+            margin-bottom: 30px;
+        }
+
+        .panel {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+        }
+
+        .panel-title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #5b3ca4;
+            margin-bottom: 15px;
+        }
+
+        .panel-image {
+            width: 100%;
+            max-height: 450px;
+            object-fit: contain;
+            border-radius: 12px;
+            background: #eeeeee;
+            margin-bottom: 15px;
+        }
+
+        .scene,
+        .action,
+        .narration,
+        .dialogue {
+            margin: 10px 0;
+            line-height: 1.6;
+        }
+
+        .label {
+            font-weight: bold;
+            color: #4b2e83;
+        }
+
+        .dialogue {
+            background: #fff4c2;
+            padding: 12px;
+            border-radius: 10px;
+            font-style: italic;
+        }
+
+        .buttons {
+            text-align: center;
+            margin: 35px 0;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 24px;
+            margin: 8px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: bold;
+            color: white;
+            background: #5b3ca4;
+        }
+
+        .btn:hover {
+            opacity: 0.85;
+        }
+
+        .empty {
+            text-align: center;
+            padding: 40px;
+            background: white;
+            border-radius: 15px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>🎨 Your Comic</h1>
+
+    {% if panels %}
+
+        {% for panel in panels %}
+
+        <div class="panel">
+
+            <div class="panel-title">
+                🖼️ Panel {{ panel.panel_number }}
+            </div>
+
+            {% if panel.image_path %}
+                <img
+                    class="panel-image"
+                    src="{{ panel.image_path }}"
+                    alt="Comic Panel {{ panel.panel_number }}"
+                >
+            {% endif %}
+
+            {% if panel.scene %}
+            <div class="scene">
+                <span class="label">📍 Scene:</span>
+                {{ panel.scene }}
+            </div>
+            {% endif %}
+
+            {% if panel.action %}
+            <div class="action">
+                <span class="label">🎬 Action:</span>
+                {{ panel.action }}
+            </div>
+            {% endif %}
+
+            {% if panel.narration %}
+            <div class="narration">
+                <span class="label">📖 Narration:</span>
+                {{ panel.narration }}
+            </div>
+            {% endif %}
+
+            {% if panel.dialogue %}
+            <div class="dialogue">
+                💬 "{{ panel.dialogue }}"
+            </div>
+            {% endif %}
+
+        </div>
+
+        {% endfor %}
+
+    {% else %}
+
+        <div class="empty">
+            <h2>😕 No panels found</h2>
+            <p>Please create the comic again.</p>
+        </div>
+
+    {% endif %}
+
+
+    <div class="buttons">
+
+        {% if comic and comic.pdf_filename %}
+        <a
+            class="btn"
+            href="/download/{{ comic.pdf_filename }}"
+        >
+            📥 Download Your Comic as PDF
+        </a>
+        {% endif %}
+
+        <a
+            class="btn"
+            href="/"
+        >
+            ✨ Create Another Comic
+        </a>
+
+    </div>
+
+</div>
+
+</body>
+</html>
